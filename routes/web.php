@@ -18,6 +18,8 @@ Route::middleware('auth')
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
     });
 
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
