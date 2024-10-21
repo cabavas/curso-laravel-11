@@ -20,4 +20,13 @@ class UserController extends Controller
         ]);
     }
 
+    public function create() {
+        return view('admin.users.create');
+    }
+
+    public function store(StoreUserRequest $request) {
+        User::create($request->all());
+        return redirect()->route('users.index');
+    }
+
 }
