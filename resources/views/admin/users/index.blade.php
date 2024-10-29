@@ -3,8 +3,13 @@
 @section('content')
 <h1>Usuários</h1>
 
-    <a href="{{route('users.create')}}">Novo</a>
+<a href="{{route('users.create')}}">Novo</a>
 
+@if(session()->has('success'))
+    {{session('success')}}
+@endif
+
+    <x-alert/>
     <table>
         <thead>
             <tr>
