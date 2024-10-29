@@ -5,10 +5,6 @@
 
 <a href="{{route('users.create')}}">Novo</a>
 
-@if(session()->has('success'))
-    {{session('success')}}
-@endif
-
     <x-alert/>
     <table>
         <thead>
@@ -23,7 +19,9 @@
                 <tr>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>-</td>
+                <td>
+                    <a href="{{route('users.edit', $user->id)}}">Edit</a>
+                </td>
                 </tr>
             @endforeach
         </tbody>
