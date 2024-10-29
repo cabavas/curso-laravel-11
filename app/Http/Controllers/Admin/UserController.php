@@ -61,4 +61,26 @@ class UserController extends Controller
         ->with('success', 'Usuário editado com sucesso');
     }
 
+    public function show(string $id) {
+        if(!$user = User::find($id)) {
+            return redirect()->route('users.index')->with('message', 'Usuário não encontrado');
+        }
+
+        return view('admin.users.show', compact('user'));
+    }
+
+    public function destroy(string $id) {
+        if(!$user = User::find($id)) {
+            return redirect()->route('users.index')->with('message', 'Usuário não encontrado');
+        }
+        if( Auth::user()->id === $user->id) {
+            return back('users.index')->with('message', 'Você não pode deletar o seu próprio usuário');
+        }
+        $user->delete();
+
+        return redirect()
+        ->route('users.index')
+        ->with('success', 'Usuário deletado com sucesso');
+    }
+
 }
