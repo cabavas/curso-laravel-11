@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends StoreUserRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -20,7 +21,7 @@ class UpdateUserRequest extends StoreUserRequest
             'min:6',
             'max:20',
         ];
-
+        
         return $rules;
     }
 }

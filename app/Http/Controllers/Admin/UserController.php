@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        User::create($request->all());
+        User::create($request->validated());
         return redirect()
             ->route('users.index')
             ->with('success', 'Usuário criado com sucesso');
@@ -44,15 +44,18 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
         if (!$user = User::find($id)) {
             return back()->with('message', 'Usuário não encontrado');
         }
-        $user->update($request->only([
-            'name',
-            'email',
-        ]));
+        $data = $request->only('name', 'email');
+
+        if($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+        $user->update($data);
+
         return redirect()
         ->route('users.index')
         ->with('success', 'Usuário editado com sucesso');
