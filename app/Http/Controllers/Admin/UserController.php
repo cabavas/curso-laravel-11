@@ -70,6 +70,9 @@ class UserController extends Controller
     }
 
     public function destroy(string $id) {
+        // if(Gate::denies('is-admin')) {
+        //     return back('users.index')->with('message', 'Você não é administrador');
+        // }
         if(!$user = User::find($id)) {
             return redirect()->route('users.index')->with('message', 'Usuário não encontrado');
         }

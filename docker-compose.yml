@@ -31,11 +31,8 @@ services:
         platform: linux/x86_64
         restart: unless-stopped
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-            # MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_USER: ${DB_USERNAME:-username}
-            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: root
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
@@ -53,7 +50,7 @@ services:
         environment:
             PMA_HOST: db
             PMA_PORT: 3306
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+            MYSQL_ROOT_PASSWORD: root
         networks:
             - laravel
 
